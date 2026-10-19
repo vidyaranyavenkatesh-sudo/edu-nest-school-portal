@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
     },
   })
   const { data: { user } } = await supabase.auth.getUser()
-  const path = request.nextUrl.pathname
+  const path = request.nextUrl.pathname.replace(/\/+$/, '') || '/'
   const isPublic = path === '/login' || path === '/api/login' || path === '/api/logout'
     || path === '/register-school' || path === '/api/register-school'
   if (!user && !isPublic) {
